@@ -18,7 +18,9 @@ const NewsCard: React.FC<Props> = ({ title, image, time }) => {
         }}
       />
       <View style={styles.cardInfo}>
-        <Text style={styles.headingInfo}>{title}</Text>
+        <Text numberOfLines={2} style={styles.headingInfo}>
+          {title}
+        </Text>
         <View style={styles.timeInfo}>
           <Image
             style={styles.timeIcon}

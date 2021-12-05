@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  headerStyle: {width: 131, height: 23},
+  separator: { marginLeft: 0, height: 20 },
 });

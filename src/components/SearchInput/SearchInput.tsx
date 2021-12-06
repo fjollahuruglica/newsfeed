@@ -21,6 +21,7 @@ const SearchInput: React.FC<Props> = ({
       </TouchableOpacity>
       <TextInput
         placeholder={title}
+        placeholderTextColor="#7c7c7c"
         value={term}
         onChangeText={onTermChange}
         autoCapitalize="none"

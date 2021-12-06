@@ -14,7 +14,7 @@ export default StyleSheet.create({
   searchTxt: {
     color: Colors.$fontColor,
     ...Fonts.normal,
-    ...Fonts.light,
+    ...Fonts.fontFamilyLight,
     paddingLeft: 10,
     fontWeight: '500',
   },

@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import NewsScreen from './src/containers/NewsScreen/NewsScreen';
-
 const Stack = createStackNavigator();
 const App = () => {
   return (

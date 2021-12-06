@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, Text } from 'react-native';
 import { Images } from '../../theme';
+import DefaultText from '../DefaultText/DefaultText';
 import styles from './NewsCardStyle';
 interface Props {
   title: string;
@@ -18,16 +19,14 @@ const NewsCard: React.FC<Props> = ({ title, image, time }) => {
         }}
       />
       <View style={styles.cardInfo}>
-        <Text numberOfLines={2} style={styles.headingInfo}>
-          {title}
-        </Text>
+        <DefaultText style={styles.headingInfo} text={title} bold />
         <View style={styles.timeInfo}>
           <Image
             style={styles.timeIcon}
             resizeMode="cover"
             source={Images.time}
           />
-          <Text style={styles.timeText}>{time}</Text>
+          <DefaultText style={styles.timeText} text={time} />
         </View>
       </View>
     </View>

@@ -22,7 +22,6 @@ export default StyleSheet.create({
   headingInfo: {
     color: Colors.$primary,
     ...Fonts.normal,
-    ...Fonts.bold,
   },
   timeInfo: {
     ...Helpers.directionRow,

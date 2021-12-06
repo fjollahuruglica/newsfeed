@@ -55,8 +55,11 @@ export default StyleSheet.create({
   justifyCenter: {
     textAlign: 'center',
   },
-  fontFamily: {
-    fontFamily: 'Ubuntu-Regular',
+  fontFamilyBold: {
+    fontFamily: 'EloquiaDisplay-ExtraBold',
+  },
+  fontFamilyLight: {
+    fontFamily: 'EloquiaText-ExtraLight',
   },
   bold: {
     fontWeight: 'bold',

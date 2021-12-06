@@ -5,16 +5,26 @@ interface Props {
   text: string;
   bold?: boolean;
   style?: any;
+  noNumberOfLines?: any;
 }
-const Header: React.FC<Props> = ({ text, bold, style }) => {
+const DefaultText: React.FC<Props> = ({
+  text,
+  bold,
+  style,
+  noNumberOfLines,
+}) => {
   return (
     <View>
       {bold ? (
-        <Text numberOfLines={2} style={{ ...Fonts.fontFamilyBold, ...style }}>
+        <Text
+          numberOfLines={noNumberOfLines ? undefined : 2}
+          style={{ ...Fonts.fontFamilyBold, ...style }}>
           {text}
         </Text>
       ) : (
-        <Text numberOfLines={2} style={{ ...Fonts.fontFamilyLight, ...style }}>
+        <Text
+          numberOfLines={noNumberOfLines ? undefined : 2}
+          style={{ ...Fonts.fontFamilyLight, ...style }}>
           {text}
         </Text>
       )}
@@ -22,4 +32,4 @@ const Header: React.FC<Props> = ({ text, bold, style }) => {
   );
 };
 
-export default Header;
+export default DefaultText;

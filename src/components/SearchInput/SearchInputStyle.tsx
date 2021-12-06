@@ -9,7 +9,7 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     ...Helpers.radius,
-    marginTop: 25,
+    marginTop: 50,
   },
   searchTxt: {
     color: Colors.$fontColor,

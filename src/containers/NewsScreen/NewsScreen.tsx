@@ -1,12 +1,23 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { RootStackParamList } from '../../../App';
 import Header from '../../components/Header/Header';
 import NewsCard from '../../components/NewsCard/NewsCard';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { Helpers } from '../../theme';
 import styles from './NewsScreenStyle';
+
+type ScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'NewsScreen'
+>;
+
+type Props = {
+  navigation: ScreenNavigationProp;
+};
 
 const DATA = [
   {
@@ -32,10 +43,10 @@ const DATA = [
   },
 ];
 
-const NewsScreen: React.FC = () => {
+const NewsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView style={{ ...Helpers.horizontalMargin }}>
-      <Header />
+      <Header title="Discover" subTitle="News from all over the world!" />
       <SearchInput
         title="Search"
         term=""
@@ -45,7 +56,12 @@ const NewsScreen: React.FC = () => {
       <FlatList
         data={DATA}
         renderItem={({ item }) => (
-          <NewsCard title={item.title} image={item.image} time={item.time} />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('NewsDetailScreen', { itemId: item.id })
+            }>
+            <NewsCard title={item.title} image={item.image} time={item.time} />
+          </TouchableOpacity>
         )}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={({ highlighted }) => (

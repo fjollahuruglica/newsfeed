@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, RefreshControl } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStackParamList } from '../../../App';
@@ -22,9 +22,14 @@ type Props = {
   navigation: ScreenNavigationProp;
 };
 
+const wait = (timeout: number | undefined) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const NewsScreen: React.FC<Props> = ({ navigation }) => {
   const [term, setTerm] = useState('');
   const [data, setData] = useState<INews[]>([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   const {
     state: { news },
@@ -38,6 +43,11 @@ const NewsScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     setData(news);
   }, [news]);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   return (
     <SafeAreaView style={{ ...Helpers.horizontalMargin, ...Helpers.fill }}>
@@ -63,6 +73,9 @@ const NewsScreen: React.FC<Props> = ({ navigation }) => {
           )}
           keyExtractor={item => item.title}
           contentContainerStyle={styles.bottomPadding}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           ItemSeparatorComponent={({ highlighted }) => (
             <View style={[styles.separator, highlighted]} />
           )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -39,6 +39,8 @@ function MyTabs() {
 }
 
 const App: React.FC<RootStackParamList> = () => {
+  const navTheme = DefaultTheme;
+  navTheme.colors.background = Colors.$white;
   return (
     <SafeAreaProvider>
       <NewsProvider>
@@ -46,7 +48,6 @@ const App: React.FC<RootStackParamList> = () => {
           <Stack.Navigator
             screenOptions={{
               headerStyle: { elevation: 0 },
-              cardStyle: { backgroundColor: Colors.$white },
             }}
             initialRouteName="Tabs">
             <Stack.Screen

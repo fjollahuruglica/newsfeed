@@ -17,6 +17,7 @@ export default StyleSheet.create({
     ...Fonts.fontFamilyLight,
     paddingLeft: 10,
     fontWeight: '500',
+    width: '100%',
   },
   searchIcon: {
     width: 25,

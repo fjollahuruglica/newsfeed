@@ -7,6 +7,8 @@ import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context as NewsContext } from '../../store/contexts/NewsContext';
 import { Fonts, Helpers } from '../../theme';
+import ThemeSwitcher from '../../components/ThemeSwitcher/ThemeSwitcher';
+import styles from './SettingsScreenStyle';
 
 const SettingsScreen: React.FC = () => {
   const {
@@ -56,6 +58,16 @@ const SettingsScreen: React.FC = () => {
           language="jp"
           onChange={onChange}
         />
+        <DefaultText
+          text="Change App Theme"
+          style={{ ...Fonts.xxlarge, ...Helpers.topMargin }}
+          bold
+        />
+        <View style={styles.separator}>
+          <DefaultText text="Dark" style={{ ...Fonts.xlarge }} />
+          <ThemeSwitcher />
+          <DefaultText text="Light" style={{ ...Fonts.xlarge }} />
+        </View>
       </View>
     </SafeAreaView>
   );

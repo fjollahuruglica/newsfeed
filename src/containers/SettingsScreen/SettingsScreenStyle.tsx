@@ -1,3 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { Helpers } from '../../theme';
 
-export default StyleSheet.create({});
+export default StyleSheet.create({
+  separator: {
+    ...Helpers.directionRow,
+    ...Helpers.alignCenter,
+    marginTop: 50,
+    ...Helpers.spaceAround,
+  },
+});

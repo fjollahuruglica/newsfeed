@@ -36,6 +36,9 @@ export default StyleSheet.create({
   spaceBetween: {
     justifyContent: 'space-between',
   },
+  spaceAround: {
+    justifyContent: 'space-around',
+  },
   directionRow: {
     flexDirection: 'row',
   },

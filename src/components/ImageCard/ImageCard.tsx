@@ -1,10 +1,11 @@
+import { useTheme } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { Image, ImageBackground, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootStackParamList } from '../../../App';
-import { Colors, Images } from '../../theme';
+import { RootStackParamList } from '../../RootContainer';
+import { Images } from '../../theme';
 import Header from '../Header/Header';
 import styles from './ImageCardStyle';
 
@@ -24,6 +25,7 @@ const ImageCard: React.FC<Props> = ({
   image,
   description,
 }) => {
+  const { colors } = useTheme();
   return (
     <ImageBackground
       source={{
@@ -32,7 +34,7 @@ const ImageCard: React.FC<Props> = ({
       resizeMode="cover"
       style={styles.cardContainer}>
       <LinearGradient
-        colors={[Colors.$transparent, Colors.$primary]}
+        colors={[colors.notification, colors.primary]}
         style={styles.gradientStyle}>
         <SafeAreaView style={styles.cardBody}>
           <TouchableOpacity onPress={() => navigation.goBack()}>

@@ -13,7 +13,16 @@
 },
 "noNews":{
     "translation":"Ottotto! Mada nyūsu wa arimasen..."
+},
+"themeChange":{
+    "translation":"Apuri no tēma o henkō suru"
   },
+  "dark":{
+    "translation":"Kurai"
+  },
+  "light":{
+    "translation":"Raito"
+}, 
 "english": {
     "translation": "Eigo"
 },

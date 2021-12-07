@@ -4,6 +4,7 @@ import { INews } from '../models';
 export interface AppState {
   news: INews[];
   language: string;
+  isLight: boolean;
 }
 
 type StateProviderProps = {

@@ -1,39 +1,39 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DefaultText from '../../components/DefaultText/DefaultText';
 import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context as NewsContext } from '../../store/contexts/NewsContext';
+import { Context as ThemeContext } from '../../store/contexts/ThemeContext';
 import { Fonts, Helpers } from '../../theme';
 import ThemeSwitcher from '../../components/ThemeSwitcher/ThemeSwitcher';
 import styles from './SettingsScreenStyle';
+import { useTheme } from '@react-navigation/native';
 
 const SettingsScreen: React.FC = () => {
   const {
     state: { language },
     changeLanguage,
   } = useContext(NewsContext);
+  const {
+    state: { isLight },
+    changeTheme,
+  } = useContext(ThemeContext);
   const [selectedLang, setSelectedLang] = useState(language);
-
+  const [selectedTheme, setSelectedTheme] = useState(isLight);
+  const { colors } = useTheme();
   const { t } = useTranslation();
-  useEffect(() => {
-    getData();
-  }, []);
 
-  const onChange = (lang: string) => {
+  const onLanguageChange = (lang: string) => {
     changeLanguage(lang);
     setSelectedLang(lang);
   };
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('language');
-      if (value !== null) {
-      }
-    } catch (e) {
-      // error reading value
-    }
+
+  const onThemeChange = (event: any) => {
+    setSelectedTheme(event);
+    changeTheme(event);
   };
 
   return (
@@ -45,28 +45,41 @@ const SettingsScreen: React.FC = () => {
         }}>
         <DefaultText
           text={t('settings.translation')}
-          style={{ ...Fonts.xxlarge }}
+          style={{ ...Fonts.xxlarge, color: colors.primary }}
           bold
         />
         <LanguageSwitcher
           selectedLang={selectedLang}
           language="en"
-          onChange={onChange}
+          onLanguageChange={onLanguageChange}
         />
         <LanguageSwitcher
           selectedLang={selectedLang}
           language="jp"
-          onChange={onChange}
+          onLanguageChange={onLanguageChange}
         />
         <DefaultText
-          text="Change App Theme"
-          style={{ ...Fonts.xxlarge, ...Helpers.topMargin }}
+          text={t('themeChange.translation')}
+          style={{
+            ...Fonts.xxlarge,
+            ...Helpers.topMargin,
+            color: colors.primary,
+          }}
           bold
         />
         <View style={styles.separator}>
-          <DefaultText text="Dark" style={{ ...Fonts.xlarge }} />
-          <ThemeSwitcher />
-          <DefaultText text="Light" style={{ ...Fonts.xlarge }} />
+          <DefaultText
+            text={t('dark.translation')}
+            style={{ ...Fonts.xlarge, color: colors.primary }}
+          />
+          <ThemeSwitcher
+            selectedTheme={selectedTheme}
+            onThemeChange={onThemeChange}
+          />
+          <DefaultText
+            text={t('light.translation')}
+            style={{ ...Fonts.xlarge, color: colors.primary }}
+          />
         </View>
       </View>
     </SafeAreaView>

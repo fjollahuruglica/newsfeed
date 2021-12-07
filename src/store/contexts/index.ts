@@ -7,10 +7,9 @@ const instance = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    apikey: 'pub_2605fa058fca8df64ece533fd71cc1ba0383',
   },
   params: {
-    apikey: 'pub_2605fa058fca8df64ece533fd71cc1ba0383',
+    apikey: 'pub_26325a56b09d29f87d04344d03f4957c314c',
   },
   timeout: 3000,
 });

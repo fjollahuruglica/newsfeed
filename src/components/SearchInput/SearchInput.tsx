@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native';
 import React, { Dispatch, SetStateAction } from 'react';
 import { View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Images } from '../../theme';
@@ -14,14 +15,18 @@ const SearchInput: React.FC<Props> = ({
   onTermChange,
   onTermSubmit,
 }) => {
+  const { colors } = useTheme();
   return (
-    <View style={styles.searchBtn}>
+    <View style={{ ...styles.searchBtn, backgroundColor: colors.border }}>
       <TouchableOpacity onPress={onTermSubmit}>
-        <Image style={styles.searchIcon} source={Images.search} />
+        <Image
+          style={{ ...styles.searchIcon, tintColor: colors.primary }}
+          source={Images.search}
+        />
       </TouchableOpacity>
       <TextInput
         placeholder={title}
-        placeholderTextColor="#7c7c7c"
+        placeholderTextColor={colors.primary}
         value={term}
         onChangeText={onTermChange}
         autoCapitalize="none"

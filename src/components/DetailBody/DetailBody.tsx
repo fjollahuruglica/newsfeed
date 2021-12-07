@@ -7,6 +7,7 @@ import TagCard from '../TagCard/TagCard';
 import Header from '../Header/Header';
 import { INews } from '../../store/models';
 import moment from 'moment';
+import { useTheme } from '@react-navigation/native';
 
 type Props = {
   toggleSubview: () => void;
@@ -22,11 +23,13 @@ const DetailBody: React.FC<Props> = ({
   item,
 }) => {
   const time = moment(item.pubDate).startOf('day').fromNow();
+  const { colors } = useTheme();
   return (
     <Animated.View
       style={{
         transform: [{ translateY: bounceValue }],
         ...styles.cardContainer,
+        backgroundColor: colors.background,
       }}>
       <ScrollView
         onScrollBeginDrag={toggleSubview}

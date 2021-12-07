@@ -14,6 +14,15 @@
   "noNews":{
     "translation":"Oops! No news yet..."
   },
+  "themeChange":{
+    "translation":"Change App Theme"
+  },
+  "dark":{
+    "translation":"Dark"
+  },
+  "light":{
+    "translation":"Light"
+  },
   "english": {
     "translation": "English"
   },

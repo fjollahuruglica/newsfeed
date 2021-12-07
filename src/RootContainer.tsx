@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import NewsScreen from './containers/NewsScreen/NewsScreen';
 import SettingsScreen from './containers/SettingsScreen/SettingsScreen';
 import NewsDetailScreen from './containers/NewsDetailScreen/NewsDetailScreen';
-import { Colors, Images } from './theme';
+import { DarkColors, LightColors, Images } from './theme';
 import { INews } from './store/models';
 import { Image } from 'react-native';
 import { Context as NewsContext } from './store/contexts/NewsContext';
+import { Context as ThemeContext } from './store/contexts/ThemeContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator<RootBottomTabParamList>();
@@ -28,11 +29,15 @@ export type RootStackParamList = {
 };
 
 function MyTabs() {
+  const { colors } = useTheme();
   return (
     <Tab.Navigator
       screenOptions={{
         headerStyle: { elevation: 0 },
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: colors.background,
+        },
       }}>
       <Tab.Screen
         name="NewsScreen"
@@ -41,7 +46,7 @@ function MyTabs() {
           tabBarIcon: ({ size, focused }) => (
             <Image
               source={focused ? Images.homeActive : Images.home}
-              style={{ width: size, height: size }}
+              style={{ width: size, height: size, tintColor: colors.primary }}
             />
           ),
         }}
@@ -53,7 +58,7 @@ function MyTabs() {
           tabBarIcon: ({ size, focused }) => (
             <Image
               source={focused ? Images.settingsActive : Images.settings}
-              style={{ width: size, height: size }}
+              style={{ width: size, height: size, tintColor: colors.primary }}
             />
           ),
         }}
@@ -65,14 +70,28 @@ function MyTabs() {
 }
 
 const RootContainer: React.FC = () => {
-  const navTheme = DefaultTheme;
-  navTheme.colors.background = Colors.$white;
   const { changeLanguage } = useContext(NewsContext);
+  const {
+    state: { isLight },
+    changeTheme,
+  } = useContext(ThemeContext);
+
   useEffect(() => {
-    getData();
+    getLanguage();
+    getTheme();
   }, []);
 
-  const getData = async () => {
+  const MyLightTheme = {
+    dark: false,
+    colors: LightColors,
+  };
+
+  const MyDarkTheme = {
+    dark: true,
+    colors: DarkColors,
+  };
+
+  const getLanguage = async () => {
     try {
       const value = await AsyncStorage.getItem('language');
       if (value !== null) {
@@ -82,8 +101,20 @@ const RootContainer: React.FC = () => {
       // error reading value
     }
   };
+
+  const getTheme = async () => {
+    try {
+      const value = await AsyncStorage.getItem('theme');
+      if (value !== null) {
+        const isLightTheme = value === 'light';
+        changeTheme(isLightTheme);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={isLight ? MyLightTheme : MyDarkTheme}>
       <Stack.Navigator
         screenOptions={{
           headerStyle: { elevation: 0 },

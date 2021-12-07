@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Colors, Helpers, Fonts } from '../../theme';
+import { Helpers, Fonts } from '../../theme';
 
 export default StyleSheet.create({
   cardContainer: {
@@ -20,7 +20,6 @@ export default StyleSheet.create({
     paddingVertical: 5,
   },
   headingInfo: {
-    color: Colors.$primary,
     ...Fonts.normal,
   },
   timeInfo: {
@@ -30,10 +29,8 @@ export default StyleSheet.create({
   timeIcon: {
     width: 13,
     height: 13,
-    tintColor: Colors.$fontColor,
   },
   timeText: {
     paddingLeft: 5,
-    color: Colors.$fontColor,
   },
 });

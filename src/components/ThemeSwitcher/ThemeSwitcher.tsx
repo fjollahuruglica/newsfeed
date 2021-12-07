@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Switch, View } from 'react-native';
 
-const ThemeSwitcher: React.FC = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+type Props = {
+  selectedTheme: boolean;
+  onThemeChange: (event: any) => void;
+};
+
+const ThemeSwitcher: React.FC<Props> = ({ selectedTheme, onThemeChange }) => {
   return (
     <View>
       <Switch
         trackColor={{ false: '#767577', true: '#81b0ff' }}
-        thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+        thumbColor={selectedTheme ? '#f5dd4b' : '#f4f3f4'}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+        onValueChange={() => onThemeChange(!selectedTheme)}
+        value={selectedTheme}
       />
     </View>
   );

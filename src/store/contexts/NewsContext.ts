@@ -4,7 +4,7 @@ import { AppState } from './createDataContext';
 import i18n from '../../i18n';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const initialState: AppState = {
+export const initialState: any = {
   news: [],
   language: 'en',
 };

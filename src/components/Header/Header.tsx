@@ -2,7 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import styles from './HeaderStyle';
 import DefaultText from '../DefaultText/DefaultText';
-import { Colors, Helpers } from '../../theme';
+import { Helpers } from '../../theme';
+import { useTheme } from '@react-navigation/native';
 interface Props {
   title: string;
   subTitle: string;
@@ -17,6 +18,7 @@ const Header: React.FC<Props> = ({
   small,
   noNumberOfLines,
 }) => {
+  const { colors } = useTheme();
   return (
     <View style={{ ...Helpers.topMargin }}>
       <DefaultText
@@ -24,13 +26,13 @@ const Header: React.FC<Props> = ({
         bold
         style={{
           ...styles.headerTextStyle,
-          color: light && Colors.$white,
+          color: light ? 'white' : colors.primary,
           fontSize: small ? 20 : 30,
         }}
       />
       <DefaultText
         text={subTitle}
-        style={styles.subHeaderStyle}
+        style={{ ...styles.subHeaderStyle, color: colors.text }}
         noNumberOfLines={noNumberOfLines}
       />
     </View>

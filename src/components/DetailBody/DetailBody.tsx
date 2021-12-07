@@ -5,18 +5,23 @@ import styles from './DetailBodyStyle';
 import { ScrollView } from 'react-native-gesture-handler';
 import TagCard from '../TagCard/TagCard';
 import Header from '../Header/Header';
+import { INews } from '../../store/models';
+import moment from 'moment';
 
 type Props = {
   toggleSubview: () => void;
   handleScroll: (event: any) => void;
   bounceValue: Animated.Value;
+  item: INews;
 };
 
 const DetailBody: React.FC<Props> = ({
   toggleSubview,
   handleScroll,
   bounceValue,
+  item,
 }) => {
+  const time = moment(item.pubDate).startOf('day').fromNow();
   return (
     <Animated.View
       style={{
@@ -29,12 +34,14 @@ const DetailBody: React.FC<Props> = ({
         scrollEventThrottle={500}
         style={{ ...Helpers.horizontalMargin }}>
         <View style={styles.tagCardContainer}>
-          <TagCard text="Micheal Scott" />
-          <TagCard text="4 hours ago" light icon />
+          <TagCard text={item.author ? item.author : 'John Doe'} />
+          <TagCard text={time} light icon />
         </View>
         <Header
-          title="The Multi-Billion Dollar Start Of A Nuclear Fusion Boom"
-          subTitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in! Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in! Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam quod dicta, consequuntur non sunt dolores ipsa repellendus asperiores dolorum repudiandae minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!  minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!  minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in! minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in! minima consequatur aspernatur voluptate expedita nemo eligendi. Non, qui in!"
+          title={item.title}
+          subTitle={
+            item.full_description ? item.full_description : item.description
+          }
           small
           noNumberOfLines
         />

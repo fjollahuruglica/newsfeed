@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { View, Image } from 'react-native';
 import { Images } from '../../theme';
@@ -6,16 +7,18 @@ import styles from './NewsCardStyle';
 interface Props {
   title: string;
   image: string;
-  time: string;
+  date: string;
 }
-const NewsCard: React.FC<Props> = ({ title, image, time }) => {
+const NewsCard: React.FC<Props> = ({ title, image, date }) => {
+  const time = moment(date).startOf('day').fromNow();
+  const number = Math.floor(Math.random() * 1000) + 200;
   return (
     <View style={styles.cardContainer}>
       <Image
         style={styles.cardImage}
         resizeMode="cover"
         source={{
-          uri: image,
+          uri: image ? image : `https://picsum.photos/${number}/${number}`,
         }}
       />
       <View style={styles.cardInfo}>

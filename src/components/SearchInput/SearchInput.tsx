@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { Images } from '../../theme';
 import styles from './SearchInputStyle';
 interface Props {
   title: string;
   term: string;
-  onTermChange: () => void;
+  onTermChange: Dispatch<SetStateAction<string>>;
   onTermSubmit: () => void;
 }
 const SearchInput: React.FC<Props> = ({

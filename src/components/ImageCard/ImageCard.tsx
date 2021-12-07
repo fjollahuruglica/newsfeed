@@ -14,12 +14,20 @@ type ScreenNavigationProp = StackNavigationProp<
 >;
 interface Props {
   navigation: ScreenNavigationProp;
+  title: string;
+  image: string;
+  description: string;
 }
-const ImageCard: React.FC<Props> = ({ navigation }) => {
+const ImageCard: React.FC<Props> = ({
+  navigation,
+  title,
+  image,
+  description,
+}) => {
   return (
     <ImageBackground
       source={{
-        uri: 'https://images.unsplash.com/photo-1638708643018-7663c16028bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+        uri: image ? image : 'https://picsum.photos/200/300',
       }}
       resizeMode="cover"
       style={styles.cardContainer}>
@@ -34,11 +42,7 @@ const ImageCard: React.FC<Props> = ({ navigation }) => {
               source={Images.backIcon}
             />
           </TouchableOpacity>
-          <Header
-            title="The Multi-Billion Dollar Start Of A Nuclear Fusion Boom"
-            subTitle="Theoretically, two lone nuclear reactors running on small pellets could power the entire planet, safely and cleanly."
-            light
-          />
+          <Header title={title} subTitle={description} light />
         </SafeAreaView>
       </LinearGradient>
     </ImageBackground>

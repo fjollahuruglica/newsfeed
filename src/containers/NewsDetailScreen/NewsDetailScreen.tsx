@@ -10,16 +10,16 @@ import { INews } from '../../store/models';
 import { Helpers } from '../../theme';
 import { RouteProp } from '@react-navigation/native';
 
-type ScreenNavigationProp = StackNavigationProp<
+type NewsDetailNavigationProp = StackNavigationProp<
   RootStackParamList,
   'NewsDetailScreen'
 >;
 
-type ScreenRouteProp = RouteProp<RootStackParamList, 'NewsDetailScreen'>;
+type NewsDetailRouteProp = RouteProp<RootStackParamList, 'NewsDetailScreen'>;
 
 type Props = {
-  route: ScreenRouteProp;
-  navigation: ScreenNavigationProp;
+  route: NewsDetailRouteProp;
+  navigation: NewsDetailNavigationProp;
   item: INews;
 };
 

@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, RefreshControl } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootStackParamList } from '../../../App';
+import { RootBottomTabParamList, RootStackParamList } from '../../../App';
 import Header from '../../components/Header/Header';
 import NewsCard from '../../components/NewsCard/NewsCard';
 import SearchInput from '../../components/SearchInput/SearchInput';
@@ -12,24 +12,26 @@ import { Helpers } from '../../theme';
 import { Context as NewsContext } from '../../store/contexts/NewsContext';
 import styles from './NewsScreenStyle';
 import { INews } from '../../store/models';
+import {
+  CompositeNavigationProp,
+  useNavigation,
+} from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
-type ScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'NewsScreen'
+type NewsScreenNavigationProp = CompositeNavigationProp<
+  BottomTabNavigationProp<RootBottomTabParamList, 'NewsScreen'>,
+  StackNavigationProp<RootStackParamList>
 >;
-
-type Props = {
-  navigation: ScreenNavigationProp;
-};
 
 const wait = (timeout: number | undefined) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 };
 
-const NewsScreen: React.FC<Props> = ({ navigation }) => {
+const NewsScreen: React.FC = () => {
   const [term, setTerm] = useState('');
   const [data, setData] = useState<INews[]>([]);
   const [refreshing, setRefreshing] = React.useState(false);
+  const navigation = useNavigation<NewsScreenNavigationProp>();
 
   const {
     state: { news },
@@ -72,7 +74,6 @@ const NewsScreen: React.FC<Props> = ({ navigation }) => {
             </TouchableOpacity>
           )}
           keyExtractor={item => item.title}
-          contentContainerStyle={styles.bottomPadding}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }

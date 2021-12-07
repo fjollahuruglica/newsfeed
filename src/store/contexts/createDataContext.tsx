@@ -3,12 +3,13 @@ import { INews } from '../models';
 
 export interface AppState {
   news: INews[];
+  language: string;
 }
 
 type StateProviderProps = {
   reducer: any;
   actions: any;
-  defaultValue: any;
+  defaultValue: AppState;
 };
 
 export default ({ reducer, actions, defaultValue }: StateProviderProps) => {

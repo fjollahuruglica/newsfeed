@@ -1,29 +1,44 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import DefaultText from '../../components/DefaultText/DefaultText';
 import { Colors, Images } from '../../theme';
 import styles from './LanguageSwitcherStyle';
 
 type Props = {
   language: string;
+  selectedLang: string;
+  onChange: (language: string) => void;
 };
 
-const LanguageSwitcher: React.FC<Props> = ({ language }) => {
+const LanguageSwitcher: React.FC<Props> = ({
+  language,
+  selectedLang,
+  onChange,
+}) => {
+  const { t } = useTranslation();
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => onChange(language)}
       style={{
         ...styles.languageContainer,
-        backgroundColor: Colors.$primary,
+        backgroundColor:
+          language === selectedLang ? Colors.$primary : Colors.$fontColor,
       }}>
       <Image
-        source={language === 'English' ? Images.usa : Images.japan}
+        source={language === 'en' ? Images.usa : Images.japan}
         style={styles.languageIcon}
       />
       <DefaultText
-        text={language}
+        text={
+          language === 'en'
+            ? t('english.translation')
+            : t('japanese.translation')
+        }
         style={{ ...styles.languageText, color: Colors.$white }}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

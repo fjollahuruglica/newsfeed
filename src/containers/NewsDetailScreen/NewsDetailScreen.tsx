@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { Animated } from 'react-native';
 import { View } from 'react-native';
-import { RootStackParamList } from '../../../App';
+import { RootStackParamList } from '../../RootContainer';
 import ImageCard from '../../components/ImageCard/ImageCard';
 import DetailBody from '../../components/DetailBody/DetailBody';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

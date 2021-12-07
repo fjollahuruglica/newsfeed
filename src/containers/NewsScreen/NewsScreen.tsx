@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { View, RefreshControl } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { RootBottomTabParamList, RootStackParamList } from '../../../App';
 import Header from '../../components/Header/Header';
 import NewsCard from '../../components/NewsCard/NewsCard';
 import SearchInput from '../../components/SearchInput/SearchInput';
@@ -17,6 +16,11 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { useTranslation } from 'react-i18next';
+import {
+  RootBottomTabParamList,
+  RootStackParamList,
+} from '../../RootContainer';
 
 type NewsScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<RootBottomTabParamList, 'NewsScreen'>,
@@ -33,14 +37,16 @@ const NewsScreen: React.FC = () => {
   const [refreshing, setRefreshing] = React.useState(false);
   const navigation = useNavigation<NewsScreenNavigationProp>();
 
+  const { t } = useTranslation();
+
   const {
-    state: { news },
+    state: { news, language },
     searchNews,
   } = useContext(NewsContext);
 
   useEffect(() => {
-    searchNews('food');
-  }, []);
+    searchNews('japan', language);
+  }, [language]);
 
   useEffect(() => {
     setData(news);
@@ -53,12 +59,15 @@ const NewsScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={{ ...Helpers.horizontalMargin, ...Helpers.fill }}>
-      <Header title="Discover" subTitle="News from all over the world" />
+      <Header
+        title={t('discover.translation')}
+        subTitle={t('discoverSubtitle.translation')}
+      />
       <SearchInput
-        title="Search"
+        title={t('search.translation')}
         term={term}
         onTermChange={setTerm}
-        onTermSubmit={() => searchNews(term)}
+        onTermSubmit={() => searchNews(term, language)}
       />
       {data?.length > 0 ? (
         <FlatList

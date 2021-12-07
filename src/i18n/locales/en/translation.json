@@ -1,0 +1,20 @@
+{
+  "discover": {
+      "translation": "Discover"
+  },
+  "discoverSubtitle": {
+    "translation": "News from all over the world"
+  },
+  "search": {
+    "translation": "Search"
+  },
+  "settings": {
+    "translation": "Language Settings"
+  },
+  "english": {
+    "translation": "English"
+  },
+  "japanese": {
+    "translation": "Japanese"
+  }
+}

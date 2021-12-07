@@ -8,6 +8,9 @@ export default StyleSheet.create({
   alignCenter: {
     alignItems: 'center',
   },
+  alignSelfCenter: {
+    alignSelf: 'center',
+  },
   justifyCenter: {
     justifyContent: 'center',
   },

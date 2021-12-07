@@ -11,6 +11,9 @@
 "settings": {
     "translation": "Gengo settei"
 },
+"noNews":{
+    "translation":"Ottotto! Mada nyūsu wa arimasen..."
+  },
 "english": {
     "translation": "Eigo"
 },

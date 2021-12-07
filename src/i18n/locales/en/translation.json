@@ -11,6 +11,9 @@
   "settings": {
     "translation": "Language Settings"
   },
+  "noNews":{
+    "translation":"Oops! No news yet..."
+  },
   "english": {
     "translation": "English"
   },

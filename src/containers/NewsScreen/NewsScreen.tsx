@@ -21,6 +21,7 @@ import {
   RootBottomTabParamList,
   RootStackParamList,
 } from '../../RootContainer';
+import DefaultText from '../../components/DefaultText/DefaultText';
 
 type NewsScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<RootBottomTabParamList, 'NewsScreen'>,
@@ -90,7 +91,12 @@ const NewsScreen: React.FC = () => {
             <View style={[styles.separator, highlighted]} />
           )}
         />
-      ) : null}
+      ) : (
+        <DefaultText
+          text={t('noNews.translation')}
+          style={{ ...Helpers.textCenter }}
+        />
+      )}
     </SafeAreaView>
   );
 };

@@ -42,7 +42,7 @@ const SettingsScreen: React.FC = () => {
           ...Helpers.topMargin,
         }}>
         <DefaultText
-          text={t('search.translation')}
+          text={t('settings.translation')}
           style={{ ...Fonts.xxlarge }}
           bold
         />

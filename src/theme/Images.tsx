@@ -6,4 +6,6 @@ export default {
   search: require('../assets/images/search-icon.png'),
   time: require('../assets/images/time.png'),
   backIcon: require('../assets/images/left-arrow.png'),
+  japan: require('../assets/images/japan.png'),
+  usa: require('../assets/images/usa.png'),
 };

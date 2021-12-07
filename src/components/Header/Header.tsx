@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import styles from './HeaderStyle';
 import DefaultText from '../DefaultText/DefaultText';
-import { Colors } from '../../theme';
+import { Colors, Helpers } from '../../theme';
 interface Props {
   title: string;
   subTitle: string;
@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({
   noNumberOfLines,
 }) => {
   return (
-    <View style={styles.headerStyle}>
+    <View style={{ ...Helpers.topMargin }}>
       <DefaultText
         text={title}
         bold

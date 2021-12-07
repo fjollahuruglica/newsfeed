@@ -42,4 +42,7 @@ export default StyleSheet.create({
   horizontalMargin: {
     marginHorizontal: 30,
   },
+  topMargin: {
+    marginTop: 50,
+  },
 });

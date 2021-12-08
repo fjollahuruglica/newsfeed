@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useEffect, useState } from 'react';
-import { View, RefreshControl } from 'react-native';
+import { View, RefreshControl, Linking } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/Header/Header';
@@ -41,8 +41,9 @@ const NewsScreen: React.FC = () => {
   const { t } = useTranslation();
 
   const {
-    state: { news, language },
+    state: { news, language, booted },
     searchNews,
+    changeAppState,
   } = useContext(NewsContext);
 
   useEffect(() => {
@@ -51,7 +52,26 @@ const NewsScreen: React.FC = () => {
 
   useEffect(() => {
     setData(news);
+
+    Linking.addEventListener('url', async res => {
+      const id = res.url.substring(7);
+      if (id && id < news.length) {
+        navigation.navigate('NewsDetailScreen', { item: news[id] });
+      }
+    });
   }, [news]);
+
+  useEffect(() => {
+    if (!booted) {
+      Linking.getInitialURL().then(url => {
+        const id = url?.substring(7);
+        if (id && id < news.length) {
+          navigation.navigate('NewsDetailScreen', { item: news[id] });
+          changeAppState(true);
+        }
+      });
+    }
+  }, [booted, news]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);

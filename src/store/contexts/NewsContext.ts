@@ -7,6 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const initialState: any = {
   news: [],
   language: 'en',
+  booted: false,
 };
 
 const reducer = (state: AppState, action: any) => {
@@ -15,6 +16,8 @@ const reducer = (state: AppState, action: any) => {
       return { ...state, news: action.payload };
     case 'CHANGE_LANGUAGE':
       return { ...state, language: action.language };
+    case 'CHANGE_APP_STATE':
+      return { ...state, booted: action.booted };
     default:
       return state;
   }
@@ -25,6 +28,11 @@ export const changeLanguage =
     dispatch({ type: 'CHANGE_LANGUAGE', language });
     i18n.changeLanguage(language);
     await AsyncStorage.setItem('language', language);
+  };
+
+export const changeAppState =
+  (dispatch: React.Dispatch<any>) => async (booted: any) => {
+    dispatch({ type: 'CHANGE_APP_STATE', booted });
   };
 
 export const searchNews =
@@ -44,6 +52,6 @@ export const searchNews =
 
 export const { Provider, Context } = createDataContext({
   reducer,
-  actions: { changeLanguage, searchNews },
+  actions: { changeLanguage, changeAppState, searchNews },
   defaultValue: initialState,
 });

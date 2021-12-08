@@ -4,9 +4,10 @@ import { Helpers, Fonts } from '../../theme';
 export default StyleSheet.create({
   searchBtn: {
     ...Helpers.directionRow,
+    ...Helpers.alignCenter,
     marginBottom: 25,
     paddingHorizontal: 20,
-    paddingVertical: 16,
+    height: 60,
     ...Helpers.radius,
     marginTop: 50,
   },
